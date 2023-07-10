@@ -1,38 +1,337 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 .App {
-  text-align: center;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 2.5fr 1fr;
+  grid-template-rows: 0.1fr 0.2fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "header header header"
+    "finish-task-box-count title-box pending-task-box-count"
+    "finish-task-box task-box calendar";
+  overflow-y: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "fecha selection hora";
+  grid-area: header;
+  justify-self: center;
+  align-self: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.finish-task-box-count {
+  justify-self: center;
+  align-self: center;
+  grid-area: finish-task-box-count;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.8px);
+  -webkit-backdrop-filter: blur(2.8px);
+  border: 1px solid rgba(0, 0, 0, 1);
+  color: #bababa;
+  width: 300px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.pending-task-box-count {
+  justify-self: center;
+  align-self: center;
+  grid-area: pending-task-box-count;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.8px);
+  -webkit-backdrop-filter: blur(2.8px);
+  border: 1px solid rgba(0, 0, 0, 1);
+  color: #bababa;
+  width: 300px;
+}
+
+.finish-task-box {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  align-items: center;
+  grid-area: finish-task-box;
+  max-height: 100%;
+  height: 300px;
+  width: 300px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  margin-bottom: 25px;
+  text-decoration: line-through;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.calendar {
+  justify-self: center;
+  align-self: center;
+  grid-area: calendar;
+  max-height: 300px;
+  max-width: 300px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  margin-bottom: 25px;
+}
+
+.task-box {
+  justify-self: center;
+  align-self: center;
+  grid-area: task-box;
+  height: 100%;
+  width: 600px;
+  max-width: 100%;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  margin-bottom: 25px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.tasks-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.title-box {
+  justify-self: center;
+  align-self: center;
+  grid-area: title-box;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.8px);
+  -webkit-backdrop-filter: blur(2.8px);
+  border: 1px solid rgba(0, 0, 0, 1);
+  color: #bababa;
+  width: 300px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  max-width: 100%;
+  width: 95%;
 }
 
-.App-link {
-  color: #61dafb;
+.button-card-box button {
+  outline: none;
+  background: transparent;
+  border: 1px solid transparent;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-finish {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-finish .button-trash {
+  outline: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.check-button {
+  color: green;
+  font-size: 20px;
+}
+
+.cancel-button {
+  color: rgb(183, 5, 5);
+  font-size: 20px;
+}
+
+.trash-button {
+  color: orange;
+}
+
+.fecha-hora {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px 0px;
+  grid-area: fecha-hora;
+}
+
+button {
+  margin: 0px 10px 0px 0px;
+  appearance: none;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 0px 0px 0px 0px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+button:hover {
+  background-color: #f3f4f6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+button:disabled {
+  background-color: #fafbfc;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959da5;
+  cursor: default;
+}
+
+button:active {
+  background-color: #edeff2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+button:focus {
+  outline: 1px transparent;
+}
+
+button:before {
+  display: none;
+}
+
+button:-webkit-details-marker {
+  display: none;
+}
+
+.hora {
+  grid-area: hora;
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  justify-self: center;
+  align-self: center;
+  grid-area: 4 / 1 / 5 / 2;
+  width: 200px;
+}
+
+.fecha {
+  grid-area: fecha;
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  justify-self: center;
+  align-self: center;
+  grid-area: 4 / 3 / 5 / 4;
+  width: 200px;
+}
+
+.selection {
+  grid-area: selection;
+  width: 700px;
+  min-width: fit-content;
+}
+
+.card-body {
+  max-width: 80%;
+}
+
+.time {
+  justify-self: center;
+  align-self: center;
+}
+
+.nav-item {
+  align-self: center;
+}
+
+.form-check {
+  align-self: center;
+}
+
+@media (max-width: 768px) {
+  .App {
+    max-width: 100%;
+    grid-template-areas:
+      "header"
+      "finish-task-box-count"
+      "title-box"
+      "pending-task-box-count"
+      "task-box"
+      "calendar";
   }
-  to {
-    transform: rotate(360deg);
+
+  .header {
+    justify-content: center;
+  }
+
+  .task-box,
+  .calendar {
+    width: 100%;
+  }
+
+  .task-box {
+    max-width: 600px;
   }
 }
+
+@media (max-width: 480px) {
+  .App {
+    grid-template-areas:
+      "header"
+      "finish-task-box-count"
+      "title-box"
+      "pending-task-box-count"
+      "task-box"
+      "calendar";
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .header {
+    justify-content: center;
+  }
+
+  .task-box,
+  .calendar {
+    width: 100%;
+  }
+}
+
